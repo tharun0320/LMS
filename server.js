@@ -6,24 +6,21 @@ const Book = require("./models/book");
 
 const app = express();
 
-// ================= MIDDLEWARE =================
+// MIDDLEWARE 
 app.use(cors());
 app.use(express.json());
 
-// ================= DATABASE CONNECTION =================
+// DATABASE CONNECTION 
 mongoose
   .connect("mongodb://127.0.0.1:27017/libraryDB")
   .then(() => console.log("✅ MongoDB Connected"))
   .catch((err) => console.log("❌ MongoDB Error:", err));
 
-// ================= TEST ROUTE =================
+// TEST ROUTE 
 app.get("/", (req, res) => {
   res.send("Library Management System API Running");
 });
-
-// =====================================================
-// ======================= GET APIs ====================
-// =====================================================
+ 
 
 // GET all books
 app.get("/books", async (req, res) => {
@@ -74,9 +71,6 @@ app.get("/books/year/:year", async (req, res) => {
   }
 });
 
-// =====================================================
-// ======================= POST APIs ===================
-// =====================================================
 
 // POST add new book
 app.post("/add-book", async (req, res) => {
@@ -123,9 +117,6 @@ app.post("/add-book", async (req, res) => {
   }
 });
 
-// =====================================================
-// ====================== PATCH APIs ===================
-// =====================================================
 
 // PATCH update book count
 app.patch("/books/update-count/:id", async (req, res) => {
@@ -175,9 +166,6 @@ app.patch("/books/update-category/:id", async (req, res) => {
   }
 });
 
-// =====================================================
-// ====================== DELETE API ===================
-// =====================================================
 
 // DELETE book only if availableCopies = 0
 app.delete("/books/:id", async (req, res) => {
@@ -202,7 +190,7 @@ app.delete("/books/:id", async (req, res) => {
   }
 });
 
-// ================= START SERVER =================
+
 const PORT = 5000;
 app.listen(PORT, () => {
   console.log(`🚀 Server running on http://localhost:${PORT}`);
